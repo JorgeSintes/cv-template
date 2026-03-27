@@ -1,0 +1,107 @@
+\documentclass[10pt,a4paper]{article}
+
+\input{template_shared.tex}
+
+\setlength{\parskip}{1.8pt}
+\linespread{1.05}
+
+\newcommand{\cvheader}{%
+  \noindent
+  \begin{minipage}[t]{0.80\linewidth}
+    {\fontsize{24}{28}\selectfont\bfseries\color{cvNavy}$title$\par}%
+    \vspace{0.4em}%
+    {\large\color{cvMustardDark}%
+      $if(role)${$role$}$endif$\par
+    }%
+    $if(email)$\vspace{0.18em}%
+    {\small\color{cvMuted}%
+      \cvRawHref{mailto:$email$}{\color{cvMuted}$email$}$if(phone)$\enspace{}|\enspace{}\cvRawHref{tel:$phone$}{\color{cvMuted}$phone$}$endif$$if(location)$\enspace{}|\enspace{}{$location$}$endif$\par
+    }$endif$
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.20\linewidth}
+    \raggedleft
+    \vspace{0.15em}%
+    $if(website)$\cvIconLink{$website$}{assets/code-solid-full.pdf}\hspace{0.95em}$endif$%
+    $if(github)$\cvIconLink{$github$}{assets/github.pdf}\hspace{0.95em}$endif$%
+    $if(linkedin)$\cvIconLink{$linkedin$}{assets/linkedin.pdf}$endif$%
+  \end{minipage}\par
+  \vspace{0.7em}%
+}
+
+\newlength{\cvJobLogoWidth}
+\newlength{\cvJobContentWidth}
+\newlength{\cvJobDateWidth}
+\setlength{\cvJobLogoWidth}{1cm}
+\setlength{\cvJobDateWidth}{3.5cm}
+\setlength{\cvJobContentWidth}{\dimexpr\linewidth-\cvJobLogoWidth-1.2em\relax}
+
+\newcommand{\cvJobCompany}[2]{%
+  {\Large\bfseries%
+    \IfNoValueTF{#2}{\color{cvNavy}#1}{\cvRawHref{#2}{\color{cvNavy}#1}}%
+  }\par
+}
+
+\NewDocumentEnvironment{jobcard}{o m o +b}{%
+  \par\vspace{0.45em}%
+  \noindent
+  \begin{minipage}{\linewidth}
+    \begin{minipage}[c]{\cvJobLogoWidth}
+      \raggedright
+      \IfValueT{#1}{\includegraphics[width=\cvJobLogoWidth]{#1}}%
+    \end{minipage}\hspace{1.2em}%
+    \begin{minipage}[c]{\cvJobContentWidth}
+      \cvJobCompany{#2}{#3}
+    \end{minipage}
+    \par\vspace{1em}%
+    #4
+  \end{minipage}
+  \par\vspace{0.35em}%
+}{}
+
+\NewDocumentCommand{\jobentry}{m m +m}{%
+  \noindent
+  \begin{minipage}[t]{\dimexpr\linewidth-\cvJobDateWidth-1em\relax}
+    {\large\bfseries\color{cvNavy}#1}%
+  \end{minipage}\hfill
+  \begin{minipage}[t]{\cvJobDateWidth}
+    \raggedleft\itshape\color{cvMustardDark}#2
+  \end{minipage}\par
+  \vspace{0.4em}%
+  #3
+  \par\vspace{0.55em}%
+}
+
+\NewDocumentCommand{\eduUni}{m m m}{%
+  \vspace{-0.35em}%
+  \noindent
+  \begin{minipage}[t]{\dimexpr\linewidth-\cvJobDateWidth-1em\relax}
+    {\large\bfseries\color{cvNavy}#1\par}%
+    \vspace{0.2em}%
+    {{\bfseries\color{cvNavy}#2}}%
+  \end{minipage}\hfill
+  \begin{minipage}[t]{\cvJobDateWidth}
+    \raggedleft\itshape\color{cvMustardDark}#3
+  \end{minipage}\par
+  \vspace{0.2em}%
+}
+
+\newcommand{\skillname}[1]{{\color{cvMustardDark}\bfseries #1}}
+\newcommand{\skill}[1]{\textbf{#1}}
+
+\newcommand{\skillrow}[2]{%
+  \noindent\skillname{#1}\enspace #2\par\vspace{0.2em}%
+}
+
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+\titlespacing*{\subsection}{0pt}{4pt}{1pt}
+\titlespacing*{\subsubsection}{0pt}{3.5pt}{0.8pt}
+
+\begin{document}
+
+\AddToShipoutPictureBG{\cvbackground}
+
+\cvheader
+
+$body$
+
+\end{document}

@@ -1,0 +1,66 @@
+\documentclass[10pt,a4paper]{article}
+
+\input{template_shared.tex}
+
+\setlength{\parskip}{1.3em}
+\linespread{1.2}
+
+\newcommand{\cvheader}{%
+  \noindent
+  \begin{minipage}[t]{0.80\linewidth}
+    {\fontsize{24}{28}\selectfont\bfseries\color{cvNavy}$title$\par}%
+    \vspace{0.4em}%
+    {\large\color{cvMustardDark}%
+      $if(role)${$role$}$endif$\par
+    }%
+    $if(email)$\vspace{0.18em}%
+    {\small\color{cvMuted}%
+      \cvRawHref{mailto:$email$}{\color{cvMuted}$email$}$if(phone)$\enspace{}|\enspace{}\cvRawHref{tel:$phone$}{\color{cvMuted}$phone$}$endif$$if(location)$\enspace{}|\enspace{}{$location$}$endif$\par
+    }$endif$
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.20\linewidth}
+    \raggedleft
+    \vspace{0.15em}%
+    $if(website)$\cvIconLink{$website$}{assets/code-solid-full.pdf}\hspace{0.95em}$endif$%
+    $if(github)$\cvIconLink{$github$}{assets/github.pdf}\hspace{0.95em}$endif$%
+    $if(linkedin)$\cvIconLink{$linkedin$}{assets/linkedin.pdf}$endif$%
+  \end{minipage}\par
+  \vspace{0.95em}%
+}
+
+\newlength{\letterNameWidth}
+
+\newcommand{\letterclosing}[1]{%
+  \settowidth{\letterNameWidth}{{\large\bfseries $title$}}%
+  \vspace{0.5em}%
+  \noindent#1\par
+  \vspace{0.25em}%
+  \noindent\makebox[\letterNameWidth][c]{\includegraphics[width=3.3cm]{assets/signature.pdf}}\par
+  \vspace{-1.8em}%
+  \noindent\textcolor{cvMustardDark}{\rule{\letterNameWidth}{0.45pt}}\par
+  {\large\bfseries\color{cvNavy}$title$}\par
+}
+
+\newcommand{\lettermeta}{%
+  \noindent
+  {\small\color{cvMuted}%
+    $if(date)$$date$$endif$$if(date)$$if(recipient)$\enspace{}|\enspace{}$endif$$endif$%
+    $if(recipient)$To: \textbf{\color{cvNavy}$recipient$}$if(company)$ at \textbf{\color{cvNavy}$company$}$endif$$endif$
+  }\par
+  \vspace{0.8em}%
+}
+
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+\titlespacing*{\subsubsection}{0pt}{4pt}{1pt}
+
+\begin{document}
+
+\AddToShipoutPictureBG{\cvbackground}
+
+\cvheader
+\lettermeta
+
+$body$
+
+\end{document}

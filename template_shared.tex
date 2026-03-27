@@ -1,0 +1,112 @@
+\usepackage[margin=0.66in]{geometry}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{xparse}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{eso-pic}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}}
+\providecommand{\passthrough}[1]{#1}
+
+\setmainfont{Roboto}
+
+\definecolor{cvMustard}{HTML}{E4A53A}
+\definecolor{cvMustardDark}{HTML}{C88A1E}
+\definecolor{cvNavy}{HTML}{001B33}
+\definecolor{cvText}{HTML}{1F2430}
+\definecolor{cvMuted}{HTML}{6B7280}
+
+\color{cvText}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=cvNavy,
+  urlcolor=cvMustardDark,
+  citecolor=cvNavy,
+  filecolor=cvNavy,
+  pdfborder={0 0 0},
+  breaklinks=true,
+  hidelinks=false,
+  pdfdisplaydoctitle=true
+}
+
+\let\cvRawHref\href
+\renewcommand{\href}[2]{\cvRawHref{#1}{\textcolor{cvMustardDark}{\uline{#2}}}}
+\newcommand{\cvTextLink}[2]{\cvRawHref{#1}{\textcolor{cvMustardDark}{\uline{#2}}}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+
+\renewcommand{\labelitemi}{\textcolor{cvMustard}{\raisebox{0.2ex}{\scriptsize\textbullet}}}
+
+\setlist[itemize,1]{
+  leftmargin=1.35em,
+  itemsep=1pt,
+  topsep=1.4pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+
+\setlist[itemize,2]{
+  leftmargin=1.2em,
+  itemsep=0.8pt,
+  topsep=1.2pt,
+  parsep=0pt,
+  partopsep=0pt
+}
+
+\newcommand{\sectionrule}{%
+  \vspace{-0.8em}\color{cvMustard}\rule{\linewidth}{0.6pt}\vspace{0em}%
+}
+
+\newlength{\cvHeaderIconSize}
+\setlength{\cvHeaderIconSize}{0.62cm}
+
+\newcommand{\cvIconLink}[2]{%
+  \cvRawHref{#1}{\raisebox{-0.15em}{\includegraphics[height=\cvHeaderIconSize]{#2}}}%
+}
+
+\newcommand{\cvTopBlobWidth}{8.4cm}
+\newcommand{\cvBottomBlobWidth}{8.4cm}
+
+\newcommand{\cvbackground}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east,inner sep=0pt] at (current page.north east) {%
+      \includegraphics[width=\cvTopBlobWidth]{assets/blob-top-right.pdf}%
+    };
+    \node[anchor=south west,inner sep=0pt] at (current page.south west) {%
+      \includegraphics[width=\cvBottomBlobWidth]{assets/blob-bottom-left.pdf}%
+    };
+  \end{tikzpicture}%
+}
+
+\titleformat{\section}
+  {\Large\bfseries\color{cvNavy}}
+  {}
+  {0pt}
+  {}
+  [\sectionrule]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{cvNavy}}
+  {}
+  {0pt}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{cvNavy}}
+  {}
+  {0pt}
+  {}
+
+\let\oldemph\emph
+\renewcommand{\emph}[1]{{\color{cvMuted}\oldemph{#1}}}
