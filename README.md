@@ -3,6 +3,11 @@
 This repository contains a reusable CV and cover letter template built with Markdown, Pandoc, and LaTeX. The
 default files provide sample content that you can replace with your own experience, projects, and education.
 
+Examples:
+
+- [CV PDF](https://jorgesintes.dev/files/examples/cv.pdf)
+- [Cover Letter PDF](https://jorgesintes.dev/files/examples/cover-letter.pdf)
+
 # Requirements
 
 - `pandoc`
