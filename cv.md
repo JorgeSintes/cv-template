@@ -110,13 +110,13 @@ massa. Mauris vulputate metus metus, sed dapibus elit viverra non.
 # About Me
 
 <!-- prettier-ignore-start -->
-\skillrow{Interests:}{I enjoy music, outdoor activities, and collaborative projects that combine creativity with
-technical problem-solving.}
+\skillrow{Interests:}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non augue in erat tincidunt pharetra cursus ac
+massa. Mauris vulputate metus metus, sed dapibus elit viverra non.}
 
-\skillrow{Learning:}{I like exploring new tools, refining workflows, and improving how teams build and maintain
-software over time.}
+\skillrow{Learning:}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non augue in erat tincidunt pharetra cursus ac
+massa. Mauris vulputate metus metus, sed dapibus elit viverra non.}
 
-\skillrow{Languages:}{English (professional), Spanish (native).}
+\skillrow{Languages:}{English (professional), Esperanto (native).}
 
 \skillrow{References:}{Available upon request.}
 <!-- prettier-ignore-end -->
