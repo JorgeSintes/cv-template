@@ -1,0 +1,11 @@
+.git
+.gitignore
+pdf
+applications/*/pdf
+*.log
+*.aux
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz

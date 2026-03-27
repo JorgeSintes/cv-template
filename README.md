@@ -17,6 +17,15 @@ make letter
 
 Generated files are written to `pdf/`.
 
+# Build with Docker
+
+```bash
+docker build -t cv-template .
+docker run --rm -v "$PWD:/work" cv-template
+```
+
+This builds both PDFs inside the container and writes them to the host `pdf/` directory.
+
 # Create a job-specific application folder
 
 ```bash
