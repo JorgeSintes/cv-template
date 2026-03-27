@@ -3,11 +3,12 @@ PUBLISH_TARGET = your-host:/path/to/public/files/
 OUT_DIR = pdf
 CV_SRC = cv.md
 LETTER_SRC = letter.md
+DOCKER_IMAGE ?= cv-build
 
 CV_PDF = $(OUT_DIR)/cv.pdf
 LETTER_PDF = $(OUT_DIR)/cover-letter.pdf
 
-.PHONY: cv letter publish clean new
+.PHONY: cv letter publish clean new docker-cv docker-letter
 
 cv:
 	mkdir -p $(OUT_DIR)
@@ -16,6 +17,16 @@ cv:
 letter:
 	mkdir -p $(OUT_DIR)
 	pandoc $(LETTER_SRC) -o $(LETTER_PDF) --pdf-engine=xelatex --template=template_letter.tex
+
+both: cv letter
+
+docker-cv:
+	docker run --rm --user "$$(id -u):$$(id -g)" -e HOME=/tmp -v "$$(pwd):/work" -w /work cv-build make cv
+
+docker-letter:
+	docker run --rm --user "$$(id -u):$$(id -g)" -e HOME=/tmp -v "$$(pwd):/work" -w /work cv-build make letter
+
+docker-both: docker-cv docker-letter
 
 new:
 	@if [ -z "$(APP)" ]; then printf "Usage: make new APP=<application-slug>\n"; exit 1; fi

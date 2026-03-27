@@ -13,18 +13,21 @@ default files provide sample content that you can replace with your own experien
 ```bash
 make cv
 make letter
+make both
 ```
 
-Generated files are written to `pdf/`.
+Generated files are written to `pdf/` and are treated as build artifacts.
 
 # Build with Docker
 
 ```bash
-docker build -t cv-template .
-docker run --rm -v "$PWD:/work" cv-template
+docker build -t cv-build .
+make docker-cv
+make docker-letter
+make docker-both
 ```
 
-This builds both PDFs inside the container and writes them to the host `pdf/` directory.
+These targets run the container as your host user so the generated files keep the right ownership.
 
 # Create a job-specific application folder
 
@@ -41,7 +44,14 @@ specific role.
 cd applications/my-application
 make cv
 make letter
+make both
+make docker-cv
+make docker-letter
+make docker-both
 ```
+
+The application Makefile builds the job-specific `cv.md` and `letter.md` while reusing the shared templates
+from the repository root.
 
 # Optional publish targets
 
@@ -56,6 +66,7 @@ Replace these first:
 - experience, projects, and education entries in `cv.md`
 - the default cover letter text in `letter.md`
 - optional publish settings in `Makefile` and `application.Makefile`
+- generated `pdf/` outputs if you want to stop tracking them in git
 
 You can also:
 
@@ -69,3 +80,5 @@ You can also:
 - The template uses `template_cv.tex` for the CV and `template_letter.tex` for the cover letter.
 - Shared styles live in `template_shared.tex`.
 - Application-specific folders reuse the templates from the repository root.
+- For app builds, run commands from inside `applications/<slug>/` so the relative template paths still
+  resolve.
